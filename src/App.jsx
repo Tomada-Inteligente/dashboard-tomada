@@ -6,6 +6,7 @@ import Home from "./pages/home/home";
 import Dashboard from "./pages/Dashboard/Dashboard";
 import LandingPage from "./pages/lading/LandingPage";
 import Configuracoes from "./pages/Configuracoes/configuracoes";
+import theme from './material-dashboard/assets/theme';
 
 
 
@@ -14,6 +15,7 @@ function App() {
     const [isAuthenticated, setIsAuthenticated] = useState(false);
 
     return (
+        <ThemeProvider theme={theme}>
         <BrowserRouter>
             <Routes>
                 <Route path="/" element={<Home />} />
@@ -24,6 +26,8 @@ function App() {
                 <Route path="/configuracoes" element={<Configuracoes />} />
             </Routes>
         </BrowserRouter>
+        </ThemeProvider>
+
     )
 }
 
