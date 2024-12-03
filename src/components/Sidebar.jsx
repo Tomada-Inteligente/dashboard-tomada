@@ -28,9 +28,6 @@ const Sidebar = ({ isMinimized, toggleSidebar }) => {
                 <li onClick={() => handleNavigation('/dashboard')} className="sidebar-item">
                     {isMinimized ? <span className="material-icons">visibility</span> : 'Visão Geral'}
                 </li>
-                <li onClick={() => handleNavigation('/meus-cursos')} className="sidebar-item">
-                    {isMinimized ? <span className="material-icons">menu_book</span> : 'Meus Cursos'}
-                </li>
                 <li onClick={() => handleNavigation('/configuracoes')} className="sidebar-item">
                     {isMinimized ? <span className="material-icons">settings</span> : 'Configurações'}
                 </li>

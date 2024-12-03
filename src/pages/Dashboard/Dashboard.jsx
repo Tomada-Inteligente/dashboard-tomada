@@ -2,118 +2,56 @@ import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom'; // Importa o useNavigate
 import Sidebar from '../../components/Sidebar.jsx';
 import DashboardCard from '../../components/DashboardCard.jsx';
+import StatisticsChart from '../../components/StatisticsChart.jsx'; // Importa o componente StatisticsChart
 import './styles.css';
 import api from '../../services/api.js';
+import PieChartComponent from '../../components/PieChartComponent';
+import TabelaDeGastos from '../../components/TabelaDeGastos.jsx';
+
 
 const Dashboard = () => {
     const [isSidebarMinimized, setIsSidebarMinimized] = useState(false);
     const [isModalOpen, setIsModalOpen] = useState(false);
-    const [selectedCourse, setSelectedCourse] = useState(null);
-    const [notification, setNotification] = useState('');
-    const [courses, setCourses] = useState([]);
-    const [myCourses, setMyCourses] = useState([]);
     const navigate = useNavigate(); // Inicializa o navigate
-
-    useEffect(() => {
-        getCourses();
-        getMyCourses();
-    }, []);
-
-    async function getCourses() {
-        try {
-            const coursesFromApi = await api.get("/courses");
-            setCourses(coursesFromApi.data);
-        } catch (error) {
-            console.error("Erro ao carregar cursos:", error);
-        }
-    }
-
-    async function getMyCourses() {
-        try {
-            const myCoursesFromApi = await api.get(`/matriCourse?userId=${localStorage.getItem("userId")}`);
-            setMyCourses(myCoursesFromApi.data);
-        } catch (error) {
-            console.error("Erro ao carregar meus cursos:", error);
-        }
-    }
 
     const toggleSidebar = () => {
         setIsSidebarMinimized(!isSidebarMinimized);
     };
 
-    const openModal = (course) => {
-        setSelectedCourse(course);
-        setIsModalOpen(true);
-    };
-
-    const closeModal = () => {
-        setIsModalOpen(false);
-        setSelectedCourse(null);
-    };
-
-    async function handleEnrollment() {
-        try {
-            await api.post('/matriCourse', {
-                userId: `${localStorage.getItem("userId")}`,
-                courseId: selectedCourse.id,
-            });
-
-            if (!myCourses.some(course => course.name === selectedCourse.name)) {
-                setMyCourses([...myCourses, selectedCourse]);
-            }
-
-            closeModal();
-            setNotification('Curso adicionado a "Meus Cursos". Você já pode acessá-lo!');
-            
-            setTimeout(() => {
-                setNotification('');
-            }, 3000);
-
-            // Redireciona o usuário para a página "meus-cursos"
-            navigate("/meus-cursos");
-
-        } catch (error) {
-            setNotification('Falha ao adicionar a "Meus Cursos"');
-            setTimeout(() => {
-                setNotification('');
-            }, 3000);
-        }
-    }
-
     return (
+
+
         <div className="dashboard">
             <Sidebar isMinimized={isSidebarMinimized} toggleSidebar={toggleSidebar} />
             <div className={`dashboard-content ${isSidebarMinimized ? 'minimized' : ''}`}>
-                <h1>Bem-vindo ao Painel do Usuario</h1>
+                <h1>Bem-vindo ao Painel do Usuário</h1>
 
-                <h2>Outros Recursos</h2>
-                <div className="cards-container">
-                    <DashboardCard title="Visualização Gráfica" description="Veja visualizações gráficas dos dados." onClick={() => window.location.href = 'http://localhost:3000'} />
-                </div>
-            </div>
+                <div className="dashboard-container">
+                    <h1 style={{ textAlign: "center", color: "#00c49f" }}>Dashboard de Energia</h1>
 
-            {isModalOpen && (
-                <div className="modal">
-                    <div className="modal-content">
-                        <span className="modal-close" onClick={closeModal}>&times;</span>
-                        {selectedCourse && (
-                            <>
-                                <h3>{selectedCourse.name}</h3>
-                                <br />
-                                <p><strong>Duração:</strong> {selectedCourse.duration} horas</p>
-                                <p><strong>Descrição:</strong> {selectedCourse.description}</p>
-                            </>
-                        )}
-                        <button onClick={handleEnrollment}>Inscreva-se</button>
+                    {/* Gráfico de Barras */}
+                    <div className="chart-container">
+                        <StatisticsChart />
+                    </div>
+
+                    {/* Gráfico de Pizza */}
+                    <div className="pie-chart-container">
+                        <PieChartComponent />
+                    </div>
+
+                    {/* Tabela de Gastos */}
+                    <div className="tabela-container">
+                        <TabelaDeGastos />
                     </div>
                 </div>
-            )}
 
-            {notification && (
-                <div className="notification">
-                    {notification}
-                </div>
-            )}
+                <br>
+                </br>
+            </div>
+
+
+
+
         </div>
     );
 };
