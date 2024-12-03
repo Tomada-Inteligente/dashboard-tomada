@@ -4,7 +4,6 @@ import Cadastro from "./pages/Cadastro";
 import Login from "./pages/Login/login";
 import Home from "./pages/home/home";
 import Dashboard from "./pages/Dashboard/Dashboard";
-import LandingPage from "./pages/lading/LandingPage";
 import Configuracoes from "./pages/Configuracoes/configuracoes";
 
 
@@ -20,7 +19,6 @@ function App() {
                 <Route path="/login" element={<Login />} /> 
                 <Route path="/cadastro" element={<Cadastro />} />
                 <Route path="/dashboard" element={<Dashboard />} />
-                <Route path="/meus-cursos" element={<LandingPage />} /> {/* Adicione esta linha */}
                 <Route path="/configuracoes" element={<Configuracoes />} />
             </Routes>
         </BrowserRouter>

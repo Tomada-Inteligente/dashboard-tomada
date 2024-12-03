@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom'; // Importa o useNavigate
 import Sidebar from '../../components/Sidebar.jsx';
-import DashboardCard from '../../components/DashboardCard.jsx';
 import StatisticsChart from '../../components/StatisticsChart.jsx'; // Importa o componente StatisticsChart
 import './styles.css';
 import api from '../../services/api.js';
