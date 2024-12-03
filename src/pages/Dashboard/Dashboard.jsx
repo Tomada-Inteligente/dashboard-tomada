@@ -84,41 +84,11 @@ const Dashboard = () => {
         <div className="dashboard">
             <Sidebar isMinimized={isSidebarMinimized} toggleSidebar={toggleSidebar} />
             <div className={`dashboard-content ${isSidebarMinimized ? 'minimized' : ''}`}>
-                <h1>Bem-vindo ao Painel do Aluno</h1>
-
-                <h2>Cursos em Destaque</h2>
-                <div className="cards-container">
-                    {courses.map((course, index) => (
-                        <DashboardCard
-                            key={index}
-                            title={course.name}
-                            description="Clique para ver detalhes"
-                            onClick={() => openModal(course)}
-                            showRating={false}
-                        />
-                    ))}
-                </div>
-
-                <h2>Meus Cursos</h2>
-                <div className="cards-container">
-                    {myCourses.length > 0 ? (
-                        myCourses.map((course, index) => (
-                            <DashboardCard
-                                key={index}
-                                title={course.course.name}
-                                description="Clique para ver detalhes"
-                                showRating={true}
-                            />
-                        ))
-                    ) : (
-                        <p>Você ainda não está inscrito em nenhum curso.</p>
-                    )}
-                </div>
+                <h1>Bem-vindo ao Painel do Usuario</h1>
 
                 <h2>Outros Recursos</h2>
                 <div className="cards-container">
-                    <DashboardCard title="Estatísticas" description="Veja as estatísticas de seus cursos." />
-                    <DashboardCard title="Configurações" description="Ajuste suas preferências." />
+                    <DashboardCard title="Visualização Gráfica" description="Veja visualizações gráficas dos dados." onClick={() => window.location.href = 'http://localhost:3000'} />
                 </div>
             </div>
 
