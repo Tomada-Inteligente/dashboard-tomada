@@ -12,15 +12,17 @@ import {
 
 const StatisticsChart = () => {
   const [data, setData] = useState([]);
+  const limiteDiario = 100; // Limite fixo de energia permitido por dia (em kWh)
 
   useEffect(() => {
     const fetchDeviceData = async () => {
       try {
-        const response = await fetch("https://api-crud-1-sqcl.onrender.com");
+        const response = await fetch("https://api-dashboard-q4h8.onrender.com/devices/daily");
         const result = await response.json();
-        const formattedData = result.map((device) => ({
-          name: device.name,
+        const formattedData = result.map((device, index) => ({
+          name: `Dia ${index + 1}`,  // Adicionando os nomes fixos como "Dia 1", "Dia 2", etc.
           gastosDiarios: device.daily,
+          limiteDiario: limiteDiario, // Adicionando o limite fixo para cada dispositivo
         }));
         setData(formattedData);
       } catch (error) {
@@ -41,7 +43,19 @@ const StatisticsChart = () => {
           <YAxis />
           <Tooltip />
           <Legend />
-          <Bar dataKey="gastosDiarios" fill="#FF8042" name="Gastos Diários (kWh)" />
+          {/* Barra de Gastos Diários */}
+          <Bar
+            dataKey="gastosDiarios"
+            fill="#FF8042"
+            name="Gastos Diários (kWh)"
+          />
+          {/* Barra de Limite Diário (fixo) */}
+          <Bar
+            dataKey="limiteDiario"
+            fill="#0088FE"
+            name="Limite Diário (kWh)"
+            barSize={30} // Tamanho das barras do limite diário
+          />
         </BarChart>
       </ResponsiveContainer>
     </div>
