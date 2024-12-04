@@ -11,7 +11,7 @@ const Configuracoes = () => {
   const [passwordError, setPasswordError] = useState('');
   const userId = localStorage.getItem('userId');
   const token = localStorage.getItem('token');
-  const apiUrl = `https://api-crud-1-sqcl.onrender.com/users/${userId}`;
+  const apiUrl = `https://api-dashboard-q4h8.onrender.com/users/${userId}`;
 
   useEffect(() => {
     const fetchUserData = async () => {

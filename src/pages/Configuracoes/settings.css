@@ -120,3 +120,21 @@
 .config-section p {
   color: white; /* Altera a cor do texto para branco */
 }
+
+.device {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 10px;
+  background-color: #2e3b8b;
+  padding: 10px;
+  border-radius: 5px;
+}
+
+.device input {
+  margin-right: 10px;
+}
+
+.device button {
+  margin-left: 10px;
+}
