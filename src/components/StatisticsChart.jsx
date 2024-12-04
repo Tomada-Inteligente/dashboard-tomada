@@ -37,7 +37,7 @@ const StatisticsChart = () => {
 
   return (
     <div className="chart-container">
-      <h3 className="statistics-header">Gastos Diários de Energia (kWh)</h3>
+      <h3 className="statistics-header">Consumo de Energia (kWh)</h3>
       <ResponsiveContainer width="100%" height={400}>
         <BarChart data={data}>
           <CartesianGrid strokeDasharray="3 3" />
