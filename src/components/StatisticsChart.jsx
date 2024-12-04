@@ -23,7 +23,7 @@ const StatisticsChart = () => {
         const formattedData = result.map((device, index) => ({
           name: device.name,  // Usando o nome do dispositivo
           gastosDiarios: device.daily,
-          limiteDiario: (index + 1) * 25, // Limite fixo incrementando de 50 em 50
+          limiteDiario: device.weekly,
         }));
 
         setData(formattedData);
@@ -55,7 +55,7 @@ const StatisticsChart = () => {
           <Bar
             dataKey="limiteDiario"
             fill="#0088FE"
-            name="Limite Diário (kWh)"
+            name="Gastos Semanais (kWh)"
             barSize={30} // Tamanho das barras do limite diário
           />
         </BarChart>
